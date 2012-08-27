@@ -52,7 +52,7 @@ require CSVLibrary_Path . 'Writer.php';
  * @since 2012
  * @category Csv
  * @package Csv
- * @version 1.0.0
+ * @version 1.0.1
  *
  */
 
@@ -101,7 +101,7 @@ class Csv implements Csv_Interface
 	public function __construct()
 	{
 		$this->_writer = Csv_Writer::getInstance();
-		$this->_reader = Csv_Reader::getInstance();	
+		$this->_reader = Csv_Reader::getInstance();
 	}
 	/**
 	 * Function to open an exists csv file
@@ -115,7 +115,10 @@ class Csv implements Csv_Interface
 		{
 			$this->_file = $file;
 			$this->_handle = fopen($this->_file, "r+");
-			return $this->fileOpened();
+			if($this->fileOpened())
+				return true;
+			else
+				Csv_Exception::triggerException(5);
 		} else
 			Csv_Exception::triggerException(3);
 	}
@@ -171,7 +174,7 @@ class Csv implements Csv_Interface
 			$this->setEnclosure($enclosure);
 			
 		if(is_string($escape))
-			$this->setEscape($escape);
+			$this->setEscape($escape);	
 			
 		if($this->fileOpened())
 			return $this->_reader->read($this->_handle, 0, $this->_delimiter, $this->_enclosure, $this->_escape);

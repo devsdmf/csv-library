@@ -34,7 +34,7 @@
  * @since 2012
  * @category Csv
  * @package Csv
- * @version 1.0.0
+ * @version 1.0.1
  *
  */
 
@@ -48,6 +48,8 @@ class Csv_Exception
 	const FILE_NOTEXISTS = 'File not exists, use create method of Csv Library.';
 	
 	const FILE_NOT_OPENED = 'Open one file first!';
+	
+	const ERROR_ON_OPEN_FILE = 'An error ocourred on open CSV file, verify settings and files.';
 	
 	const DEFAULT_EXCEPTION = 'Unknow error!';
 	/**
@@ -70,6 +72,9 @@ class Csv_Exception
 				break;
 			case 4 :
 				return self::FILE_NOT_OPENED;
+				break;
+			case 5 :
+				return self::ERROR_ON_OPEN_FILE;
 				break;
 			default :
 				return self::DEFAULT_EXCEPTION;
